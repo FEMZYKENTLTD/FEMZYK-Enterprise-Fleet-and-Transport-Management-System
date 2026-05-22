@@ -1,8 +1,3 @@
-Below is a **premium GitHub-ready README** with strong visual structure, emojis, badges, tables, screenshots section, architecture, roadmap, and professional wording.
-
-Copy everything **inside** the Markdown block into your GitHub `README.md`.
-
-```markdown
 # 🚗✨ Femzyk Car Rental Agency — Vehicle Management System v4.0+
 
 <div align="center">
@@ -89,28 +84,77 @@ The system was developed to achieve the following objectives:
 
 ## 📸 Screenshots
 
-Screenshots are stored in the [`screenshots/`](screenshots/) folder.
+The `screenshots/` folder contains visual documentation of the application interface, including authentication, vehicle creation, editing, dashboard layout, recycle bin actions, validation errors, and GitHub deployment progress.
 
-### 🖥️ Application Preview
+### 🔐 Authentication Screens
 
-| Startup / Login | Dashboard |
+| First Screen | Login With Details | Sign Up |
+|---|---|---|
+| ![First Screen](screenshots/The%20first%20Screen%20after%20loading%20the%20application.png) | ![Login Page](screenshots/Login%20page%20with%20details%20.png) | ![Sign Up Page](screenshots/sign%20up%20page.png) |
+
+| Signing Up Details | Invalid Email Error | Username Already Exists |
+|---|---|---|
+| ![Signing Up Details](screenshots/signing%20up%20details.png) | ![Invalid Email](screenshots/using%20invalid%20email%20to%20register.png) | ![Username Exists](screenshots/signing%20up%20using%20a%20username%20that%20already%20exists.png) |
+
+| Email Already Used | Password Reset |
 |---|---|
-| ![Login Page](screenshots/Login%20page%20with%20details%20.png) | ![Dashboard](screenshots/Dashboard%20after%20login.png) |
+| ![Email Already Used](screenshots/email%20already%20used%20error.png) | ![Password Reset](screenshots/reset%20password%20interface.png) |
 
-| Add Car | Add Motorcycle |
+---
+
+### 📊 Dashboard and Fleet Display
+
+| Dashboard After Login | Dashboard With Vehicles and Scroll |
 |---|---|
-| ![Add Car](screenshots/Adding%20a%20car.png) | ![Add Motorcycle](screenshots/Adding%20a%20Motorcycle.png) |
+| ![Dashboard After Login](screenshots/Dashboard%20after%20login.png) | ![Dashboard With Vehicles](screenshots/the%20dashboard%20after%20adding%20vehicles%20with%20vertical%20and%20horizontal%20scroll%20enabled.png) |
 
-| Add Truck | Recycle Bin |
+| Screen Auto Resizing | User Separation |
 |---|---|
-| ![Add Truck](screenshots/Adding%20a%20Truck.png) | ![Recycle Bin](screenshots/recycle%20bin%20interface.png) |
+| ![Screen Auto Resizing](screenshots/screen%20autoresizing.png) | ![User Separation](screenshots/user%20separation%20using%20different%20accounts.png) |
 
-| Password Reset | User Separation |
+---
+
+### 🚗 Adding Vehicles
+
+| Add Car Form | Car Fuel Options |
 |---|---|
-| ![Password Reset](screenshots/reset%20password%20interface.png) | ![User Separation](screenshots/user%20separation%20using%20different%20accounts.png) |
+| ![Add Car](screenshots/Adding%20a%20car.png) | ![Car Options](screenshots/Adding%20a%20car%20options.png) |
 
-> If images do not load, confirm the screenshot filenames in the `screenshots/` folder match the paths above.
+| Add Motorcycle Form | Motorcycle Options |
+|---|---|
+| ![Add Motorcycle](screenshots/Adding%20a%20Motorcycle.png) | ![Motorcycle Options](screenshots/Adding%20a%20Motorcycle%20options.png) |
 
+| Add Truck Form | Truck Options |
+|---|---|
+| ![Add Truck](screenshots/Adding%20a%20Truck.png) | ![Truck Options](screenshots/Adding%20a%20Truck%20options.png) |
+
+---
+
+### ✏️ Editing Vehicles
+
+| Edit Car | Edit Motorcycle | Edit Truck |
+|---|---|---|
+| ![Edit Car](screenshots/editing%20car%20info.png) | ![Edit Motorcycle](screenshots/Editing%20motorcycle%20info.png) | ![Edit Truck](screenshots/editing%20truck%20info.png) |
+
+---
+
+### 🗑️ Recycle Bin and Deletion Workflow
+
+| Delete Warning | Recycle Bin Interface | Select Vehicle To Recover |
+|---|---|---|
+| ![Delete Warning](screenshots/delete%20notification%20or%20warning.png) | ![Recycle Bin](screenshots/recycle%20bin%20interface.png) | ![Select Vehicle To Recover](screenshots/select%20vehicle%20to%20recover.png) |
+
+| Permanent Delete Warning | Clear Bin Warning | Clear Fleet Warning |
+|---|---|---|
+| ![Permanent Delete](screenshots/permanently%20delete%20notification%20or%20warning.png) | ![Clear Bin](screenshots/clear%20all%20bin%20warning.png) | ![Clear Fleet](screenshots/clear%20fleet%20warning.png) |
+
+---
+
+### 🚪 Session and Deployment
+
+| Logout Confirmation | GitHub Push |
+|---|---|
+| ![Logout](screenshots/log%20out%20notification.png) | ![GitHub Push](screenshots/WHILE%20PUSHING%20TO%20GITHUB.png) |
 ---
 
 ## ✨ Feature Highlights
@@ -153,14 +197,10 @@ The application includes a full local authentication system.
 ### 🛡️ Password Security
 
 Passwords are hashed using:
-
-```text
 PBKDF2WithHmacSHA256
-```
 
 The system stores:
 
-```text
 Username
 Email
 Password salt
