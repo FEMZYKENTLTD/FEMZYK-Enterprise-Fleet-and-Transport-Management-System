@@ -1,4 +1,6 @@
-# ðŸš— Femzyk Car Rental Agency â€” Vehicle Management System v4.0+
+
+```markdown
+# Femzyk Car Rental Agency - Vehicle Management System v4.0+
 
 A premium Java Swing desktop application for managing a vehicle rental fleet, featuring **multi-user authentication**, **secure password hashing**, **email-based account recovery**, **vehicle CRUD operations**, **optional renter tracking**, **auto-save**, **user-specific profiles**, and a **Recycle Bin** for safe deletion.
 
@@ -12,11 +14,11 @@ A premium Java Swing desktop application for managing a vehicle rental fleet, fe
 
 ---
 
-## ðŸ“¸ Screenshots
+## Screenshots
 
-Screenshots of the interface should be placed inside the `screenshots/` folder.
+Screenshots of the application interface are stored in the `screenshots/` folder.
 
-Suggested screenshots:
+Suggested screenshots include:
 
 ```text
 screenshots/
@@ -31,64 +33,64 @@ screenshots/
 
 ---
 
-## ðŸŽ¯ About The Project
+## About The Project
 
-**Femzyk Car Rental Agency â€” Vehicle Management System** is a professional desktop fleet management application built with **Java 17**, **Java Swing**, and **Maven**.
+**Femzyk Car Rental Agency - Vehicle Management System** is a professional desktop fleet management application built with **Java 17**, **Java Swing**, and **Maven**.
 
 The system is designed for a rental agency that manages multiple vehicle categories:
 
-- ðŸš˜ Cars
-- ðŸ Motorcycles
-- ðŸšš Trucks
+- Cars
+- Motorcycles
+- Trucks
 
 The application demonstrates modern object-oriented programming principles and desktop application design, including:
 
-- ðŸ” Secure user authentication
-- ðŸ“§ Email-based account recovery
-- ðŸ’¾ Persistent local storage
-- ðŸ—‘ï¸ Soft delete with Recycle Bin
-- â™»ï¸ Vehicle recovery system
-- ðŸ‘¤ User-specific profiles
-- ðŸ§¾ Optional renter information
-- ðŸ“Š Real-time fleet statistics
-- ðŸŽ¨ Premium dark-themed GUI
-- ðŸ§± Clean object-oriented architecture
+- Secure user authentication
+- Email-based account recovery
+- Persistent local storage
+- Soft delete with Recycle Bin
+- Vehicle recovery system
+- User-specific profiles
+- Optional renter information
+- Real-time fleet statistics
+- Premium dark-themed GUI
+- Clean object-oriented architecture
 
 ---
 
-## âœ¨ Features
+## Features
 
-### ðŸ” Authentication & Account Management
+### Authentication and Account Management
 
-- âœ… User signup
-- âœ… User login
-- âœ… Email validation during signup
-- âœ… Show/hide password option
-- âœ… Forgot password / password reset
-- âœ… Password reset using username + registered email
-- âœ… Secure password hashing with `PBKDF2WithHmacSHA256`
-- âœ… Separate saved data for each user
+- User signup
+- User login
+- Email validation during signup
+- Show/hide password option
+- Forgot password / password reset
+- Password reset using username and registered email
+- Secure password hashing with `PBKDF2WithHmacSHA256`
+- Separate saved data for each user
 
-### ðŸš— Vehicle Management
+### Vehicle Management
 
-- âœ… Add cars
-- âœ… Add motorcycles
-- âœ… Add trucks
-- âœ… Edit vehicle details
-- âœ… Delete vehicles safely
-- âœ… View vehicles by category
-- âœ… Store optional renter details
-- âœ… Auto-save vehicle records
+- Add cars
+- Add motorcycles
+- Add trucks
+- Edit vehicle details
+- Delete vehicles safely
+- View vehicles by category
+- Store optional renter details
+- Auto-save vehicle records
 
-### ðŸ—‘ï¸ Recycle Bin
+### Recycle Bin
 
-- âœ… Deleted vehicles move to Recycle Bin
-- âœ… Recover deleted vehicles
-- âœ… Permanently delete selected vehicles
-- âœ… Clear entire Recycle Bin
-- âœ… Recycle Bin count shown in statistics
+- Deleted vehicles move to Recycle Bin
+- Recover deleted vehicles
+- Permanently delete selected vehicles
+- Clear entire Recycle Bin
+- Recycle Bin count shown in statistics
 
-### ðŸ’¾ Persistent Storage
+### Persistent Storage
 
 The application saves data automatically using local `.dat` files.
 
@@ -102,7 +104,7 @@ User-specific recycle bin
 Last saved date/time
 ```
 
-### ðŸ“Š Fleet Statistics
+### Fleet Statistics
 
 The dashboard sidebar displays:
 
@@ -116,20 +118,20 @@ Recycle Bin count
 Last added vehicle
 ```
 
-### ðŸŽ¨ UI/UX Excellence
+### UI/UX Design
 
-- ðŸŽ¨ Professional dark theme
-- ðŸŒˆ Vehicle-type color coding
-- ðŸ§© Card-based fleet display
-- â†”ï¸ Horizontal scrolling per vehicle section
-- â†•ï¸ Vertical scrolling for full dashboard
-- ðŸ–±ï¸ Touchpad-friendly scrolling
-- ðŸ”˜ Styled toolbar buttons
-- ðŸ§¾ User-friendly validation messages
+- Professional dark theme
+- Vehicle-type color coding
+- Card-based fleet display
+- Horizontal scrolling per vehicle section
+- Vertical scrolling for full dashboard
+- Touchpad-friendly scrolling
+- Styled toolbar buttons
+- User-friendly validation messages
 
 ---
 
-## ðŸ› ï¸ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -143,70 +145,70 @@ Last added vehicle
 
 ---
 
-## ðŸ“ Project Structure
+## Project Structure
 
 ```text
 unit 6 Vehicle Information System/
-â”‚
-â”œâ”€â”€ pom.xml
-â”œâ”€â”€ README.md
-â”‚
-â”œâ”€â”€ docs/
-â”‚   â”œâ”€â”€ PROJECT_PLAN.md
-â”‚   â”œâ”€â”€ USER_GUIDE.md
-â”‚   â”œâ”€â”€ TECHNICAL_DESIGN.md
-â”‚   â”œâ”€â”€ TEST_PLAN.md
-â”‚   â””â”€â”€ ROADMAP.md
-â”‚
-â”œâ”€â”€ screenshots/
-â”œâ”€â”€ backups/
-â”‚
-â””â”€â”€ src/main/java/com/femzyk/vehiclesystem/
-    â”‚
-    â”œâ”€â”€ VehicleRentalSystem.java
-    â”‚
-    â”œâ”€â”€ exception/
-    â”‚   â”œâ”€â”€ VehicleException.java
-    â”‚   â”œâ”€â”€ InvalidCargoException.java
-    â”‚   â”œâ”€â”€ InvalidDoorsException.java
-    â”‚   â”œâ”€â”€ InvalidFuelTypeException.java
-    â”‚   â”œâ”€â”€ InvalidTransmissionException.java
-    â”‚   â”œâ”€â”€ InvalidWheelsException.java
-    â”‚   â””â”€â”€ InvalidYearException.java
-    â”‚
-    â”œâ”€â”€ interfaces/
-    â”‚   â”œâ”€â”€ Vehicle.java
-    â”‚   â”œâ”€â”€ CarVehicle.java
-    â”‚   â”œâ”€â”€ MotorVehicle.java
-    â”‚   â””â”€â”€ TruckVehicle.java
-    â”‚
-    â”œâ”€â”€ model/
-    â”‚   â”œâ”€â”€ Car.java
-    â”‚   â”œâ”€â”€ Motorcycle.java
-    â”‚   â””â”€â”€ Truck.java
-    â”‚
-    â””â”€â”€ gui/
-        â”œâ”€â”€ MainWindow.java
-        â”œâ”€â”€ LoginDialog.java
-        â”œâ”€â”€ PasswordResetDialog.java
-        â”œâ”€â”€ AddCarDialog.java
-        â”œâ”€â”€ AddMotorcycleDialog.java
-        â”œâ”€â”€ AddTruckDialog.java
-        â”œâ”€â”€ FleetPanel.java
-        â”œâ”€â”€ VehicleCardPanel.java
-        â”œâ”€â”€ StatsPanel.java
-        â”œâ”€â”€ RecycleBinDialog.java
-        â”œâ”€â”€ ThemeConstants.java
-        â”œâ”€â”€ UserAccount.java
-        â”œâ”€â”€ UserDatabase.java
-        â”œâ”€â”€ PasswordUtil.java
-        â”œâ”€â”€ StorageManager.java
-        â””â”€â”€ StoredFleetData.java
+│
+├── pom.xml
+├── README.md
+│
+├── docs/
+│   ├── PROJECT_PLAN.md
+│   ├── USER_GUIDE.md
+│   ├── TECHNICAL_DESIGN.md
+│   ├── TEST_PLAN.md
+│   └── ROADMAP.md
+│
+├── screenshots/
+├── backups/
+│
+└── src/main/java/com/femzyk/vehiclesystem/
+    │
+    ├── VehicleRentalSystem.java
+    │
+    ├── exception/
+    │   ├── VehicleException.java
+    │   ├── InvalidCargoException.java
+    │   ├── InvalidDoorsException.java
+    │   ├── InvalidFuelTypeException.java
+    │   ├── InvalidTransmissionException.java
+    │   ├── InvalidWheelsException.java
+    │   └── InvalidYearException.java
+    │
+    ├── interfaces/
+    │   ├── Vehicle.java
+    │   ├── CarVehicle.java
+    │   ├── MotorVehicle.java
+    │   └── TruckVehicle.java
+    │
+    ├── model/
+    │   ├── Car.java
+    │   ├── Motorcycle.java
+    │   └── Truck.java
+    │
+    └── gui/
+        ├── MainWindow.java
+        ├── LoginDialog.java
+        ├── PasswordResetDialog.java
+        ├── AddCarDialog.java
+        ├── AddMotorcycleDialog.java
+        ├── AddTruckDialog.java
+        ├── FleetPanel.java
+        ├── VehicleCardPanel.java
+        ├── StatsPanel.java
+        ├── RecycleBinDialog.java
+        ├── ThemeConstants.java
+        ├── UserAccount.java
+        ├── UserDatabase.java
+        ├── PasswordUtil.java
+        ├── StorageManager.java
+        └── StoredFleetData.java
 ```
 
 ---
 
-## ðŸš€ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -225,7 +227,7 @@ mvn -version
 
 ---
 
-## ðŸ’» Build and Run
+## Build and Run
 
 ### Compile
 
@@ -253,7 +255,7 @@ java -cp target\classes com.femzyk.vehiclesystem.VehicleRentalSystem
 
 ---
 
-## ðŸ“– Usage Guide
+## Usage Guide
 
 ### Create Account
 
@@ -278,7 +280,7 @@ java -cp target\classes com.femzyk.vehiclesystem.VehicleRentalSystem
 
 ---
 
-## ðŸš˜ Vehicle Types
+## Vehicle Types
 
 ### Car
 
@@ -341,7 +343,7 @@ AUTOMATIC
 
 ---
 
-## ðŸ—‘ï¸ Recycle Bin Explained
+## Recycle Bin Explained
 
 | Action | Result |
 |---|---|
@@ -352,7 +354,7 @@ AUTOMATIC
 
 ---
 
-## ðŸ’¾ Storage Location
+## Storage Location
 
 Application data is stored under the current Windows user's home folder:
 
@@ -378,7 +380,7 @@ FemzykVehicleSystem/
 
 ---
 
-## ðŸ§ª Testing
+## Testing
 
 Full testing checklist is available in:
 
@@ -395,7 +397,7 @@ mvn exec:java
 
 ---
 
-## ðŸ§  OOP Concepts Demonstrated
+## OOP Concepts Demonstrated
 
 | Concept | How It Appears |
 |---|---|
@@ -408,7 +410,7 @@ mvn exec:java
 
 ---
 
-## ðŸ—ºï¸ Roadmap
+## Roadmap
 
 ### Completed
 
@@ -441,7 +443,7 @@ mvn exec:java
 
 ---
 
-## ðŸŒ Future Web and Mobile Direction
+## Future Web and Mobile Direction
 
 The long-term plan is to expand the system into:
 
@@ -463,20 +465,20 @@ Shared Database
 
 ---
 
-## ðŸ‘¨â€ðŸ’» Author
+## Author
 
 **Olufemi Keripe**  
 **Brand:** FEMZYK ENTERPRISES LTD  
 **Project:** CS 1102-01 Unit 6 Vehicle Information System  
 
-- ðŸŒ Nigeria
-- ðŸ’¼ AI Powered Full-Stack Developer
-- ðŸ™ GitHub: https://github.com/FEMZYKENTLTD
-- ðŸ“§ Email: femzykenterprises@gmail.com
+- Nigeria
+- AI Powered Full-Stack Developer
+- GitHub: https://github.com/FEMZYKENTLTD
+- Email: femzykenterprises@gmail.com
 
 ---
 
-## ðŸ™ Acknowledgments
+## Acknowledgments
 
 - University of the People
 - CS 1102-01 Programming Course
@@ -490,6 +492,7 @@ Shared Database
 
 **Built with dedication using Java 17, Swing, Maven, and OOP principles.**
 
-Desktop Today Â· Web Portal Next Â· Mobile/PWA Future
+Desktop Today - Web Portal Next - Mobile/PWA Future
 
 </div>
+```
