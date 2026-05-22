@@ -90,7 +90,7 @@ The `screenshots/` folder contains visual documentation of the application inter
 
 | First Screen | Login With Details | Sign Up |
 |---|---|---|
-| ![First Screen](screenshots/The%20first%20Screen%20after%20loading%20the%20application.png) | ![Login Page](screenshots/Login%20page%20with%20details%20.png) | ![Sign Up Page](screenshots/sign%20up%20page.png) |
+| ![Login Page](screenshots/Login%20page%20with%20details%20.png) | ![Sign Up Page](screenshots/sign%20up%20page.png) |
 
 | Signing Up Details | Invalid Email Error | Username Already Exists |
 |---|---|---|
