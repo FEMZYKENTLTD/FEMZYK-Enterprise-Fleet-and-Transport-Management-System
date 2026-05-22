@@ -1,0 +1,36 @@
+﻿# Java / Maven
+target/
+*.class
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Backups and generated archives
+backups/
+*.zip
+
+# Local app data
+FemzykVehicleSystem/
+*.dat
+
+# Source dump / temporary generated files
+current-project-source-dump.txt
+*.tmp
+*.bak
+
+# Keep screenshots folder if empty using .gitkeep
+
+# Visual Studio cache
+.vs/
