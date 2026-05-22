@@ -1,151 +1,429 @@
+Below is a **premium GitHub-ready README** with strong visual structure, emojis, badges, tables, screenshots section, architecture, roadmap, and professional wording.
+
+Copy everything **inside** the Markdown block into your GitHub `README.md`.
 
 ```markdown
-# Femzyk Car Rental Agency - Vehicle Management System v4.0+
+# 🚗✨ Femzyk Car Rental Agency — Vehicle Management System v4.0+
 
-A premium Java Swing desktop application for managing a vehicle rental fleet, featuring **multi-user authentication**, **secure password hashing**, **email-based account recovery**, **vehicle CRUD operations**, **optional renter tracking**, **auto-save**, **user-specific profiles**, and a **Recycle Bin** for safe deletion.
+<div align="center">
 
 ![Java](https://img.shields.io/badge/Made%20with-Java%2017-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Swing](https://img.shields.io/badge/GUI-Java%20Swing-2563EB?style=for-the-badge)
 ![Maven](https://img.shields.io/badge/Build-Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![Storage](https://img.shields.io/badge/Storage-Local%20DAT%20Files-16A34A?style=for-the-badge)
-![Platform](https://img.shields.io/badge/Desktop-Windows%20%7C%20Java%20Runtime-blue?style=for-the-badge)
+![Security](https://img.shields.io/badge/Security-PBKDF2%20Password%20Hashing-7C3AED?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Desktop%20Stable-success?style=for-the-badge)
 ![Future](https://img.shields.io/badge/Future-Web%20%7C%20Mobile%20PWA-purple?style=for-the-badge)
 
+### A premium Java Swing desktop fleet management system with authentication, persistent storage, renter tracking, recycle bin recovery, and professional dark-theme UI.
+
+**Desktop Today · Web Portal Next · Mobile/PWA Future**
+
+</div>
+
 ---
 
-## Screenshots
+## 📌 Table of Contents
 
-Screenshots of the application interface are stored in the `screenshots/` folder.
+- [📖 Executive Summary](#-executive-summary)
+- [🎯 Project Objectives](#-project-objectives)
+- [📸 Screenshots](#-screenshots)
+- [✨ Feature Highlights](#-feature-highlights)
+- [🔐 Authentication and Security](#-authentication-and-security)
+- [🚘 Vehicle Management](#-vehicle-management)
+- [🗑️ Recycle Bin System](#️-recycle-bin-system)
+- [💾 Persistent Storage](#-persistent-storage)
+- [📊 Dashboard and Statistics](#-dashboard-and-statistics)
+- [🧠 OOP Concepts Demonstrated](#-oop-concepts-demonstrated)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🧪 Testing Guide](#-testing-guide)
+- [🗺️ Roadmap](#️-roadmap)
+- [🌐 Future Web and Mobile Expansion](#-future-web-and-mobile-expansion)
+- [👨‍💻 Author](#-author)
+- [🙏 Acknowledgments](#-acknowledgments)
 
-Suggested screenshots include:
+---
+
+## 📖 Executive Summary
+
+**Femzyk Car Rental Agency — Vehicle Management System** is a premium Java Swing desktop application built to manage a rental fleet containing **cars**, **motorcycles**, and **trucks**.
+
+The system is designed as a professional-grade academic desktop application that demonstrates strong software engineering practices, including:
+
+- 🔐 Secure multi-user authentication
+- 📧 Email-based account recovery
+- 🔑 Password hashing with PBKDF2
+- 🚘 Vehicle CRUD operations
+- 👤 Optional renter information
+- 💾 Persistent local storage
+- 🗑️ Soft delete with Recycle Bin
+- ♻️ Vehicle recovery
+- 📊 Real-time fleet statistics
+- 🎨 Modern dark-themed user interface
+- 🧱 Clean object-oriented architecture
+
+This project is suitable for demonstrating **Java programming**, **GUI development**, **OOP principles**, **file-based persistence**, **authentication workflows**, and **desktop application design**.
+
+---
+
+## 🎯 Project Objectives
+
+The system was developed to achieve the following objectives:
+
+| No. | Objective |
+|---:|---|
+| 1 | Provide a graphical system for managing rental vehicles |
+| 2 | Support multiple vehicle categories: cars, motorcycles, and trucks |
+| 3 | Allow users to add, edit, view, and safely delete vehicle records |
+| 4 | Store optional renter name and phone number |
+| 5 | Save user and fleet data automatically |
+| 6 | Support multiple users through signup and login |
+| 7 | Keep each user's fleet data separate |
+| 8 | Provide password reset using registered email |
+| 9 | Prevent accidental deletion using a Recycle Bin |
+| 10 | Demonstrate professional OOP architecture and clean code practices |
+
+---
+
+## 📸 Screenshots
+
+Screenshots are stored in the [`screenshots/`](screenshots/) folder.
+
+### 🖥️ Application Preview
+
+| Startup / Login | Dashboard |
+|---|---|
+| ![Login Page](screenshots/Login%20page%20with%20details%20.png) | ![Dashboard](screenshots/Dashboard%20after%20login.png) |
+
+| Add Car | Add Motorcycle |
+|---|---|
+| ![Add Car](screenshots/Adding%20a%20car.png) | ![Add Motorcycle](screenshots/Adding%20a%20Motorcycle.png) |
+
+| Add Truck | Recycle Bin |
+|---|---|
+| ![Add Truck](screenshots/Adding%20a%20Truck.png) | ![Recycle Bin](screenshots/recycle%20bin%20interface.png) |
+
+| Password Reset | User Separation |
+|---|---|
+| ![Password Reset](screenshots/reset%20password%20interface.png) | ![User Separation](screenshots/user%20separation%20using%20different%20accounts.png) |
+
+> If images do not load, confirm the screenshot filenames in the `screenshots/` folder match the paths above.
+
+---
+
+## ✨ Feature Highlights
+
+### 🧩 Core Application Features
+
+- 🚘 Add, edit, and manage cars
+- 🏍️ Add, edit, and manage motorcycles
+- 🚚 Add, edit, and manage trucks
+- 👤 Optional renter name and phone number
+- 🗑️ Recycle Bin for safe deletion
+- ♻️ Recover deleted vehicles
+- 💥 Permanent deletion from Recycle Bin
+- 🔥 Clear Recycle Bin
+- 💾 Automatic saving
+- 📊 Real-time statistics panel
+- 🎨 Premium dark theme
+- ↔️ Horizontal scrolling for each vehicle section
+- ↕️ Vertical scrolling for dashboard navigation
+- 🖱️ Touchpad-friendly scrolling behavior
+
+---
+
+## 🔐 Authentication and Security
+
+The application includes a full local authentication system.
+
+### 🔑 Authentication Features
+
+| Feature | Description |
+|---|---|
+| 👤 Signup | New users can create accounts |
+| 🔓 Login | Existing users can securely log in |
+| 📧 Email validation | Signup requires a valid email |
+| 👁️ Show password | Users can reveal password while typing |
+| 🔁 Forgot password | Users can reset password using username and email |
+| 🔐 Password hashing | Plain passwords are never stored |
+| 👥 User separation | Each user has separate fleet data |
+
+### 🛡️ Password Security
+
+Passwords are hashed using:
 
 ```text
-screenshots/
-    login-screen.png
-    signup-screen.png
-    password-reset.png
-    dashboard.png
-    add-car-dialog.png
-    fleet-sections.png
-    recycle-bin.png
+PBKDF2WithHmacSHA256
+```
+
+The system stores:
+
+```text
+Username
+Email
+Password salt
+Password hash
+Date created
+Last login date
+Last password reset date
+```
+
+The system does **not** store plain text passwords.
+
+---
+
+## 🚘 Vehicle Management
+
+The system supports three vehicle categories.
+
+---
+
+### 🚗 Cars
+
+A car record includes:
+
+```text
+Make
+Model
+Year
+Number of doors
+Fuel type
+Optional renter name
+Optional renter phone
+```
+
+Fuel type options:
+
+```text
+PETROL
+DIESEL
+ELECTRIC
 ```
 
 ---
 
-## About The Project
+### 🏍️ Motorcycles
 
-**Femzyk Car Rental Agency - Vehicle Management System** is a professional desktop fleet management application built with **Java 17**, **Java Swing**, and **Maven**.
+A motorcycle record includes:
 
-The system is designed for a rental agency that manages multiple vehicle categories:
+```text
+Make
+Model
+Year
+Number of wheels
+Motorcycle type
+Optional renter name
+Optional renter phone
+```
 
-- Cars
-- Motorcycles
-- Trucks
+Motorcycle type options:
 
-The application demonstrates modern object-oriented programming principles and desktop application design, including:
-
-- Secure user authentication
-- Email-based account recovery
-- Persistent local storage
-- Soft delete with Recycle Bin
-- Vehicle recovery system
-- User-specific profiles
-- Optional renter information
-- Real-time fleet statistics
-- Premium dark-themed GUI
-- Clean object-oriented architecture
+```text
+SPORT
+CRUISER
+OFF-ROAD
+```
 
 ---
 
-## Features
+### 🚚 Trucks
 
-### Authentication and Account Management
+A truck record includes:
 
-- User signup
-- User login
-- Email validation during signup
-- Show/hide password option
-- Forgot password / password reset
-- Password reset using username and registered email
-- Secure password hashing with `PBKDF2WithHmacSHA256`
-- Separate saved data for each user
+```text
+Make
+Model
+Year
+Cargo capacity
+Transmission type
+Optional renter name
+Optional renter phone
+```
 
-### Vehicle Management
+Transmission options:
 
-- Add cars
-- Add motorcycles
-- Add trucks
-- Edit vehicle details
-- Delete vehicles safely
-- View vehicles by category
-- Store optional renter details
-- Auto-save vehicle records
+```text
+MANUAL
+AUTOMATIC
+```
 
-### Recycle Bin
+---
 
-- Deleted vehicles move to Recycle Bin
-- Recover deleted vehicles
-- Permanently delete selected vehicles
-- Clear entire Recycle Bin
-- Recycle Bin count shown in statistics
+## 👤 Renter Information
 
-### Persistent Storage
+Renter details are optional.
 
-The application saves data automatically using local `.dat` files.
+Each vehicle can store:
 
-Saved data includes:
+```text
+Renter name
+Renter phone number
+```
+
+If no renter is assigned, the system displays:
+
+```text
+Renter: Not assigned
+Phone: N/A
+```
+
+Phone numbers are validated only when entered.
+
+Accepted phone examples:
+
+```text
+08012345678
++1 555 123 4567
+(555) 123-4567
+555-123-4567
+```
+
+---
+
+## 🗑️ Recycle Bin System
+
+The application uses soft deletion.
+
+When a vehicle is deleted, it is moved to the Recycle Bin instead of being removed permanently.
+
+### 🧹 Recycle Bin Actions
+
+| Action | Result |
+|---|---|
+| 🗑️ Delete vehicle | Moves vehicle to Recycle Bin |
+| ♻️ Recover | Restores vehicle to active fleet |
+| 💥 Delete Permanently | Removes vehicle forever |
+| 🔥 Clear Bin | Permanently deletes all recycled vehicles |
+
+This prevents accidental data loss and gives users a chance to restore deleted vehicles.
+
+---
+
+## 💾 Persistent Storage
+
+The application uses Java serialization and `.dat` files for local storage.
+
+### 📂 Storage Structure
+
+Application data is stored under the current user's home folder:
+
+```text
+user-home/FemzykVehicleSystem/
+```
+
+Typical Windows example:
+
+```text
+C:/Users/FemiBenua/FemzykVehicleSystem/
+```
+
+Inside:
+
+```text
+FemzykVehicleSystem/
+    users.dat
+    profiles/
+        username/
+            fleet-data.dat
+```
+
+### 💽 Saved Data Includes
 
 ```text
 Registered users
-Password hashes and salts
-User-specific active fleet
-User-specific recycle bin
+Password salts
+Password hashes
+Active fleet vehicles
+Recycle bin vehicles
 Last saved date/time
+Application version
 ```
 
-### Fleet Statistics
+### ⚙️ Auto-Save Events
 
-The dashboard sidebar displays:
+The system saves automatically when:
+
+- A vehicle is added
+- A vehicle is edited
+- A vehicle is moved to Recycle Bin
+- A vehicle is recovered
+- A vehicle is permanently deleted
+- The Recycle Bin is cleared
+- The fleet is cleared
+- The user logs out
+- The application closes
+
+---
+
+## 📊 Dashboard and Statistics
+
+The statistics panel displays:
 
 ```text
-Current user
+Current logged-in user
 Total active vehicles
-Cars count
-Motorcycles count
-Trucks count
+Number of cars
+Number of motorcycles
+Number of trucks
 Recycle Bin count
 Last added vehicle
 ```
 
-### UI/UX Design
-
-- Professional dark theme
-- Vehicle-type color coding
-- Card-based fleet display
-- Horizontal scrolling per vehicle section
-- Vertical scrolling for full dashboard
-- Touchpad-friendly scrolling
-- Styled toolbar buttons
-- User-friendly validation messages
+This gives users an immediate overview of the fleet composition.
 
 ---
 
-## Tech Stack
+## 🎨 UI/UX Design
+
+The application uses a professional dark interface.
+
+### 🎭 Design Highlights
+
+- 🌑 Deep navy background
+- 🔵 Blue accent for cars
+- 🟠 Orange accent for motorcycles
+- 🔴 Red accent for trucks and danger actions
+- 🟢 Green accent for recovery/success actions
+- 🧾 Card-based fleet layout
+- ↔️ Horizontal scroll per vehicle section
+- ↕️ Vertical scroll for the full dashboard
+- 🖱️ Touchpad-friendly interaction
+- 🧩 Structured dialogs for add/edit operations
+
+---
+
+## 🧠 OOP Concepts Demonstrated
+
+| OOP Concept | How It Appears |
+|---|---|
+| 🧱 Encapsulation | Private fields with getters and setters |
+| 🎭 Abstraction | `Vehicle` interface defines shared vehicle behavior |
+| 🔁 Polymorphism | `List<Vehicle>` stores cars, motorcycles, and trucks |
+| 🧩 Interface Segregation | `CarVehicle`, `MotorVehicle`, and `TruckVehicle` separate type-specific behavior |
+| 🧼 Separation of Concerns | GUI, storage, authentication, models, and exceptions are separated |
+| 🚨 Exception Handling | Custom validation exceptions improve error handling |
+| 💾 Persistence | Serializable model objects are saved to local `.dat` files |
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Language | Java 17 |
-| GUI | Java Swing |
-| Build Tool | Maven |
-| Storage | Java Serialization / `.dat` files |
-| Authentication | Local user database |
-| Password Security | PBKDF2WithHmacSHA256 |
-| Architecture | Object-Oriented Programming |
+| ☕ Language | Java 17 |
+| 🖥️ GUI Framework | Java Swing |
+| 🧰 Build Tool | Maven |
+| 💾 Storage | Java Serialization / `.dat` files |
+| 🔐 Authentication | Local user database |
+| 🔑 Password Security | PBKDF2WithHmacSHA256 |
+| 🧱 Architecture | Object-Oriented Programming |
+| 🧪 Testing Method | Manual functional testing + Maven compile validation |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 unit 6 Vehicle Information System/
@@ -208,13 +486,13 @@ unit 6 Vehicle Information System/
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📌 Prerequisites
 
 Install:
 
-- Java 17+
+- Java 17 or later
 - Maven
 - A Java IDE such as IntelliJ IDEA, VS Code, Eclipse, or Visual Studio with Java/Maven support
 
@@ -227,21 +505,21 @@ mvn -version
 
 ---
 
-## Build and Run
+## 💻 Build and Run
 
-### Compile
+### 🧱 Compile
 
 ```powershell
 mvn clean compile
 ```
 
-Expected:
+Expected result:
 
 ```text
 BUILD SUCCESS
 ```
 
-### Run
+### ▶️ Run
 
 ```powershell
 mvn exec:java
@@ -255,164 +533,120 @@ java -cp target\classes com.femzyk.vehiclesystem.VehicleRentalSystem
 
 ---
 
-## Usage Guide
+## 📖 Usage Guide
 
-### Create Account
+### 👤 Create Account
 
-1. Open the app.
-2. Go to **Sign Up**.
-3. Enter username, email, password, and confirm password.
-4. Click **Sign Up**.
+1. Open the application.
+2. Click **Sign Up**.
+3. Enter username.
+4. Enter email.
+5. Enter password.
+6. Confirm password.
+7. Click **Sign Up**.
 
-### Login
+### 🔓 Login
 
 1. Enter username.
 2. Enter password.
 3. Optionally check **Show password**.
 4. Click **Login**.
 
-### Reset Password
+### 🔁 Reset Password
 
 1. Click **Forgot Password**.
-2. Enter username and registered email.
-3. Enter and confirm a new password.
-4. Click **Reset Password**.
+2. Enter username.
+3. Enter registered email.
+4. Enter new password.
+5. Confirm new password.
+6. Click **Reset Password**.
+
+### ➕ Add Vehicle
+
+Use the toolbar buttons:
+
+```text
+Add Car
+Add Motorcycle
+Add Truck
+```
+
+### ✏️ Edit Vehicle
+
+Click:
+
+```text
+Edit
+```
+
+on a vehicle card.
+
+### 🗑️ Delete Vehicle
+
+Click:
+
+```text
+Delete
+```
+
+The vehicle moves to Recycle Bin.
+
+### ♻️ Recover Vehicle
+
+1. Click **Recycle Bin**.
+2. Select a vehicle.
+3. Click **Recover**.
+
+### 🚪 Logout
+
+Click:
+
+```text
+Logout
+```
+
+The system saves data and returns to the login screen.
 
 ---
 
-## Vehicle Types
+## 🧪 Testing Guide
 
-### Car
-
-```text
-Make
-Model
-Year
-Number of doors
-Fuel type
-Optional renter name
-Optional renter phone
-```
-
-Fuel types:
-
-```text
-PETROL
-DIESEL
-ELECTRIC
-```
-
-### Motorcycle
-
-```text
-Make
-Model
-Year
-Number of wheels
-Motorcycle type
-Optional renter name
-Optional renter phone
-```
-
-Motorcycle types:
-
-```text
-SPORT
-CRUISER
-OFF-ROAD
-```
-
-### Truck
-
-```text
-Make
-Model
-Year
-Cargo capacity
-Transmission type
-Optional renter name
-Optional renter phone
-```
-
-Transmission types:
-
-```text
-MANUAL
-AUTOMATIC
-```
-
----
-
-## Recycle Bin Explained
-
-| Action | Result |
-|---|---|
-| Delete vehicle | Moves vehicle to Recycle Bin |
-| Recover | Restores vehicle to active fleet |
-| Delete Permanently | Removes vehicle forever |
-| Clear Bin | Permanently deletes all recycled vehicles |
-
----
-
-## Storage Location
-
-Application data is stored under the current Windows user's home folder:
-
-```text
-user-home/FemzykVehicleSystem/
-```
-
-Typical Windows example:
-
-```text
-C:/Users/FemiBenua/FemzykVehicleSystem/
-```
-
-Inside:
-
-```text
-FemzykVehicleSystem/
-    users.dat
-    profiles/
-        username/
-            fleet-data.dat
-```
-
----
-
-## Testing
-
-Full testing checklist is available in:
+A full testing checklist is available in:
 
 ```text
 docs/TEST_PLAN.md
 ```
 
-Basic test command:
+Basic verification:
 
 ```powershell
 mvn clean compile
 mvn exec:java
 ```
 
+### Recommended Manual Tests
+
+- Signup with valid email
+- Signup with invalid email
+- Duplicate username rejection
+- Duplicate email rejection
+- Login with correct password
+- Login with wrong password
+- Password reset
+- Add vehicle
+- Edit vehicle
+- Delete vehicle
+- Recover vehicle
+- Clear Recycle Bin
+- Logout and login again
+- Confirm saved data reloads
+- Confirm different users have separate fleets
+
 ---
 
-## OOP Concepts Demonstrated
+## 🗺️ Roadmap
 
-| Concept | How It Appears |
-|---|---|
-| Encapsulation | Private fields with getters/setters |
-| Abstraction | Vehicle interface |
-| Polymorphism | List of Vehicle objects stores all vehicle types |
-| Interface Segregation | CarVehicle, MotorVehicle, TruckVehicle |
-| Separation of Concerns | GUI, model, storage, auth, and exception classes separated |
-| Exception Handling | Custom validation exceptions |
-
----
-
-## Roadmap
-
-### Completed
+### ✅ Completed
 
 - [x] Java Swing desktop application
 - [x] Vehicle CRUD
@@ -426,26 +660,43 @@ mvn exec:java
 - [x] Auto-save
 - [x] Fleet statistics
 - [x] Scrollable vehicle sections
+- [x] Touchpad-friendly scrolling
 
-### Planned
+### 🚧 Planned Desktop Enhancements
 
 - [ ] Vehicle search
-- [ ] Vehicle filters
+- [ ] Vehicle filtering
 - [ ] Export to CSV
 - [ ] Import from CSV
-- [ ] Backup/restore button
+- [ ] Backup and restore button
 - [ ] Admin role
-- [ ] Web portal
-- [ ] Mobile/PWA version
-- [ ] Backend API
-- [ ] SQLite/PostgreSQL migration
-- [ ] Integration into another website
+- [ ] Light/dark theme toggle
+- [ ] Printable rental reports
+- [ ] Rental price tracking
+- [ ] Rental due dates
+
+### 🌐 Planned Web Portal
+
+- [ ] Java Spring Boot backend
+- [ ] REST API authentication
+- [ ] Browser-based dashboard
+- [ ] Responsive web interface
+- [ ] Website integration support
+- [ ] Database migration to SQLite/PostgreSQL
+
+### 📱 Planned Mobile/PWA
+
+- [ ] Responsive mobile interface
+- [ ] Progressive Web App support
+- [ ] Installable mobile experience
+- [ ] Touch-first forms
+- [ ] Mobile-friendly dashboard
 
 ---
 
-## Future Web and Mobile Direction
+## 🌐 Future Web and Mobile Direction
 
-The long-term plan is to expand the system into:
+The long-term plan is to evolve the system into three connected platforms:
 
 ```text
 1. Desktop Application
@@ -463,22 +714,24 @@ Mobile/PWA Frontend
 Shared Database
 ```
 
+This direction allows the system to later integrate into another website and support phone, tablet, and laptop users.
+
 ---
 
-## Author
+## 👨‍💻 Author
 
 **Olufemi Keripe**  
 **Brand:** FEMZYK ENTERPRISES LTD  
 **Project:** CS 1102-01 Unit 6 Vehicle Information System  
 
-- Nigeria
-- AI Powered Full-Stack Developer
-- GitHub: https://github.com/FEMZYKENTLTD
-- Email: femzykenterprises@gmail.com
+- 🌍 Nigeria
+- 💼 AI Powered Full-Stack Developer
+- 🐙 GitHub: https://github.com/FEMZYKENTLTD
+- 📧 Email: femzykenterprises@gmail.com
 
 ---
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - University of the People
 - CS 1102-01 Programming Course
@@ -490,9 +743,13 @@ Shared Database
 
 <div align="center">
 
+## ⭐ Show Your Support
+
+If this project is helpful, educational, or inspiring, consider giving it a star on GitHub.
+
 **Built with dedication using Java 17, Swing, Maven, and OOP principles.**
 
-Desktop Today - Web Portal Next - Mobile/PWA Future
+Desktop Today · Web Portal Next · Mobile/PWA Future
 
 </div>
 ```
