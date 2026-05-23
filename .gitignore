@@ -34,3 +34,6 @@ current-project-source-dump.txt
 
 # Visual Studio cache
 .vs/
+
+# Release build folder
+dist/
