@@ -231,7 +231,7 @@ Last password reset date
 
 The system does **not** store plain text passwords.
 
----
+
 
 ## 🚘 Vehicle Management
 
