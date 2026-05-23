@@ -227,7 +227,7 @@ Password hash
 Date created
 Last login date
 Last password reset date
-```
+
 
 The system does **not** store plain text passwords.
 
