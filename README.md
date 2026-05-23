@@ -82,6 +82,25 @@ The system was developed to achieve the following objectives:
 
 ---
 
+## Download Latest Release
+
+Download the Windows desktop release here:
+
+[Download Femzyk Vehicle Management System v1.0.0](https://github.com/FEMZYKENTLTD/Femzyk-Vehicle-Management-System/releases/tag/v1.0.0)
+
+### How to Run
+
+1. Download `FemzykVehicleSystem-v1.0.0-Windows.zip`
+2. Extract the ZIP file.
+3. Open the extracted folder.
+4. Double-click:
+```
+Run-FemzykVehicleSystem.bat
+```
+
+Java 17 or higher is required.
+```
+
 ## 📸 Screenshots
 
 The `screenshots/` folder contains visual documentation of the application interface, including authentication, vehicle creation, editing, dashboard layout, recycle bin actions, validation errors, and GitHub deployment progress.
