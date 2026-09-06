@@ -1,4 +1,4 @@
-﻿# Java / Maven
+# Java / Maven
 target/
 *.class
 
@@ -17,23 +17,20 @@ Thumbs.db
 # Logs
 *.log
 
-# Backups and generated archives
+# Local application data (SQLite database, backups, exports live under ~/.femzyk-fleet by default)
+.femzyk-fleet/
 backups/
-*.zip
+*.db-wal
+*.db-shm
 
-# Local app data
+# Legacy v4.x serialized data files, EXCEPT the committed test fixtures used by LegacyDataMigratorTest
 FemzykVehicleSystem/
 *.dat
+!src/test/resources/legacy-v4/**
 
-# Source dump / temporary generated files
-current-project-source-dump.txt
+# Temporary files
 *.tmp
 *.bak
-
-# Keep screenshots folder if empty using .gitkeep
-
-# Visual Studio cache
-.vs/
-
-# Release build folder
+*.zip
 dist/
+.vs/

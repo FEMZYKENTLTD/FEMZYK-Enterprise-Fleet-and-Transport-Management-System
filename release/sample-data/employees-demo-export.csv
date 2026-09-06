@@ -1,0 +1,11 @@
+employee_code,first_name,last_name,phone,email,address,department,position,date_of_birth,hire_date,salary,status,emergency_contact_name,emergency_contact_phone,notes
+EMP-0008,Yusuf,Abdullahi,08118901234,yusuf.abdullahi@femzyk.demo,"Ikeja, Lagos",Transport,Truck Driver,1983-06-30,2021-09-06,160000.0,ACTIVE,Family of Yusuf,07008901234,[DEMO DATA]
+EMP-0004,Funke,Adeyemi,08074567890,funke.adeyemi@femzyk.demo,"Ikeja, Lagos",Transport,Driver,1990-11-02,2023-09-06,120000.0,ACTIVE,Family of Funke,07004567890,[DEMO DATA]
+EMP-0006,Tunde,Bakare,08096789012,tunde.bakare@femzyk.demo,"Ikeja, Lagos",Transport,Driver / Dispatch Rider,1995-09-09,2025-07-06,95000.0,ACTIVE,Family of Tunde,07006789012,[DEMO DATA]
+EMP-0002,Chiamaka,Eze,08052345678,chiamaka.eze@femzyk.demo,"Ikeja, Lagos",Operations,Operations Officer,1992-07-04,2024-06-06,220000.0,ACTIVE,Family of Chiamaka,07002345678,[DEMO DATA]
+EMP-0009,Blessing,Johnson,08129012345,blessing.johnson@femzyk.demo,"Ikeja, Lagos",Maintenance,Workshop Supervisor,1987-12-01,2023-03-06,210000.0,ACTIVE,Family of Blessing,07009012345,[DEMO DATA]
+EMP-0003,Ibrahim,Musa,08063456789,ibrahim.musa@femzyk.demo,"Ikeja, Lagos",Transport,Senior Driver,1980-01-20,2020-09-06,145000.0,ACTIVE,Family of Ibrahim,07003456789,[DEMO DATA]
+EMP-0005,Emeka,Nwosu,08085678901,emeka.nwosu@femzyk.demo,"Ikeja, Lagos",Transport,Driver,1988-05-15,2025-01-06,120000.0,ACTIVE,Family of Emeka,07005678901,[DEMO DATA]
+EMP-0007,Ngozi,Okafor,08107890123,ngozi.okafor@femzyk.demo,"Ikeja, Lagos",Finance,Accounts Officer,1991-02-28,2024-09-06,240000.0,ACTIVE,Family of Ngozi,07007890123,[DEMO DATA]
+EMP-0001,Adebayo,Okonkwo,08031234567,adebayo.okonkwo@femzyk.demo,"Ikeja, Lagos",Operations,Fleet Manager,1985-03-12,2022-09-06,350000.0,ACTIVE,Family of Adebayo,07001234567,[DEMO DATA]
+EMP-0010,Segun,Olawale,08130123456,segun.olawale@femzyk.demo,"Ikeja, Lagos",Transport,Driver,1993-04-18,2025-01-06,120000.0,ACTIVE,Family of Segun,07000123456,[DEMO DATA]
