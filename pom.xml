@@ -1,97 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    pom.xml — Maven Project Configuration
-    Project: Femzyk Vehicle Rental System
-    Package: com.femzyk.vehiclesystem
-    Author:  Femzyk Enterprise Systems
-    
-    This file tells Maven:
-    - What version of Java to use (17)
-    - What dependencies/libraries the project needs
-    - How to build and run the project
+    FEMZYK Enterprise Fleet & Transport Management System
+    Maven build configuration.
+
+    Build:    mvn clean test          (compile + unit/integration tests)
+              mvn clean package       (executable fat JAR in target/)
+    Run:      java -jar target/FEMZYK-Fleet-Management.jar
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Project Identity -->
     <groupId>com.femzyk</groupId>
-    <artifactId>vehiclesystem</artifactId>
-    <version>1.0.0</version>
+    <artifactId>fleet-management</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <!-- Project Information -->
-    <name>Femzyk Vehicle Rental System</name>
+    <name>FEMZYK Enterprise Fleet and Transport Management System</name>
     <description>
-        Enterprise Vehicle Information Management System
-        CS 1102-01 Programming 1 - Unit 6 Assignment
+        Desktop fleet and transport management system (vehicles, drivers, employees, assignments,
+        trips, maintenance, fuel, expenses, reporting, audit) built with Java 17, Swing and SQLite.
+        Developed for LASU CSC 392 - Practical Application of Software Development in Industries.
     </description>
+    <url>https://github.com/FEMZYKENTLTD/Femzyk-Vehicle-Management-System</url>
 
-    <!-- Properties: Set Java version to 17 -->
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <main.class>com.femzyk.fleetmanagement.FleetManagementApplication</main.class>
+        <sqlite.version>3.45.1.0</sqlite.version>
+        <junit.version>5.10.2</junit.version>
+        <slf4j.version>2.0.9</slf4j.version>
     </properties>
 
-    <!-- Dependencies: External libraries your project uses -->
     <dependencies>
-
-        <!-- JUnit 5: For unit testing -->
+        <!-- Relational database: embedded SQLite via JDBC -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.10.0</version>
-            <scope>test</scope>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>${sqlite.version}</version>
+        </dependency>
+        <!-- sqlite-jdbc logs through SLF4J; a simple binding keeps the console quiet and useful -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
-    <!-- Build Configuration -->
     <build>
+        <finalName>FEMZYK-Fleet-Management</finalName>
         <plugins>
-
-            <!-- Maven Compiler Plugin: Compiles Java 17 code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <release>17</release>
                     <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-Xlint:all,-serial,-processing</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
-
-            <!-- Maven Exec Plugin: Lets you run the program with mvn exec:java -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
                 <configuration>
-                    <!-- This tells Maven which class has the main() method -->
-                    <mainClass>com.femzyk.vehiclesystem.VehicleRentalSystem</mainClass>
+                    <argLine>-Djava.awt.headless=true</argLine>
+                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
-
-            <!-- Maven Jar Plugin: Creates a runnable JAR file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.4.2</version>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.femzyk.vehiclesystem.VehicleRentalSystem</mainClass>
+                            <mainClass>${main.class}</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <Implementation-Title>FEMZYK Enterprise Fleet and Transport Management System</Implementation-Title>
+                            <Implementation-Vendor>FEMZYK Enterprise</Implementation-Vendor>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
-
+            <!-- Fat JAR: java -jar works with no classpath setup -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>module-info.class</exclude>
+                                        <exclude>META-INF/versions/9/module-info.class</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${main.class}</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>
