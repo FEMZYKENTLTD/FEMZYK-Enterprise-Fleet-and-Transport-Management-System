@@ -2,13 +2,15 @@
   "name": "femzyk-fleet-web",
   "version": "3.0.0",
   "private": true,
-  "description": "FEMZYK Enterprise Fleet & Transport Management System — web edition (Next.js + PostgreSQL/Supabase)",
+  "description": "FEMZYK Enterprise Fleet & Transport Management System \u2014 web edition (Next.js + PostgreSQL/Supabase)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:ui": "node tests/build.mjs && node tests/ui.test.js",
+    "test": "npm run test:ui"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",
@@ -20,9 +22,14 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.5",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.9",
     "@types/node": "^24.0.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "^25.0.1",
     "tailwindcss": "^4.3.5",
     "typescript": "^5.9.0"
   }

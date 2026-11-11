@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { AlertCircle, LogIn } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button, Field, TextInput } from '@/components/ui';
@@ -44,8 +45,14 @@ export function LoginForm({ demoMode }: { demoMode: boolean }) {
           <TextInput type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" />
         </Field>
 
+        <div className="-mt-1 text-right">
+          <Link href="/login/reset" className="text-[11px] font-medium text-slate-500 hover:text-blue-700">
+            Forgot your password?
+          </Link>
+        </div>
+
         {error && (
-          <div className="flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-[12px] font-medium text-rose-700">
+          <div role="alert" className="flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-[12px] font-medium text-rose-700">
             <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" /> {error}
           </div>
         )}

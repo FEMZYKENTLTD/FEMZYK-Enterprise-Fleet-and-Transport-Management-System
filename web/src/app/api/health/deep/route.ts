@@ -8,7 +8,7 @@ import { listDrivers } from '@/lib/services/drivers';
 import { listAssignments } from '@/lib/services/assignments';
 import { listTrips } from '@/lib/services/trips';
 import { listMaintenance, maintenanceDue, listFuel, listExpenses } from '@/lib/services/operations';
-import { login, listUsers, findByUsername } from '@/lib/auth';
+import { login, listUsers, findByUsername, resetPasswordWithEmail } from '@/lib/auth';
 import { createSessionToken, readSessionToken } from '@/lib/session';
 import { roleHas, ROLE_PERMISSIONS, type Role } from '@/lib/domain';
 import { reportToCsv, reportToHtml } from '@/lib/services/reports';
@@ -115,6 +115,18 @@ export async function runDiagnostic() {
       role: dbUser.role, mustChangePassword: false,
     });
     return `${users.length} users visible to administrator`;
+  }));
+
+  push(await check('reset:rejects-mismatched-identity', async () => {
+    // Non-destructive: a wrong e-mail must be refused before any write.
+    let rejected = false;
+    try {
+      await resetPasswordWithEmail('admin', 'not-the-registered-address@example.com', 'Irrelevant123');
+    } catch {
+      rejected = true;
+    }
+    if (!rejected) throw new Error('a mismatched username/e-mail was accepted');
+    return 'mismatched identity rejected';
   }));
 
   push(await check('export:csv', async () => {

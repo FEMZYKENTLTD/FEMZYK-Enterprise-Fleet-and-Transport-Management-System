@@ -112,10 +112,29 @@ Safety properties, so it can be re-run without fear:
 | `ops` | `Ops@2026` | OPERATIONS_OFFICER — trips, maintenance, fuel, expenses, reports |
 | `viewer` | `View@2026` | VIEWER — read-only dashboards and reports |
 
+## Accounts and password reset
+
+There is **no public sign-up**. This system holds company fleet, driver, payroll and audit data, so accounts
+are issued rather than self-registered:
+
+1. The first administrator is created by `POST /api/bootstrap` (see *First-run / seeding* above).
+2. That administrator creates everyone else under **Users & roles** → *Create user*, choosing the role. New
+   accounts get a temporary password and `must_change_password`, which forces the new user to pick their own
+   password at first sign-in.
+3. Anyone who forgets their password can use **Forgot your password?** on the sign-in screen
+   (`/login/reset`). The username and the e-mail already on the account must both match; the user then sets a
+   new password and is signed out of nothing else. There is no mail server in this deployment, so the reset
+   completes on the page instead of by e-mail link.
+4. An administrator can also reset any password from **Users & roles** without knowing the old one.
+
 ## Verified behaviour
 
 * `npx tsc --noEmit` — clean.
-* `npm run build` — clean (26 route handlers, 13 screens).
+* `npm run build` — clean (27 route handlers, 14 screens).
+* `npm test` — 11 browser-level interaction tests against the real sign-in and password-reset components
+  (jsdom + Testing Library). Covers disabled-until-filled submit buttons, the request actually sent, the
+  error banner on a rejected login, network-failure handling, the demo-account chips, and password-mismatch
+  validation. Verified to be non-vacuous: removing the post-login navigation makes the suite fail.
 * Business rules ported 1:1 from the Java services: vehicle status transition map, licence-category permits,
   one-active-assignment partial unique indexes, trip odometer rules (≤5,000 km, no regression), fuel total derivation,
   maintenance status ↔ vehicle status coupling, expense mirroring, last-administrator protection.
