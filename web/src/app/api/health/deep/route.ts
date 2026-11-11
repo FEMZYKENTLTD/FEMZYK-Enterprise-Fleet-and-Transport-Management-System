@@ -8,6 +8,10 @@ import { listDrivers } from '@/lib/services/drivers';
 import { listAssignments } from '@/lib/services/assignments';
 import { listTrips } from '@/lib/services/trips';
 import { listMaintenance, maintenanceDue, listFuel, listExpenses } from '@/lib/services/operations';
+import { login, listUsers, findByUsername } from '@/lib/auth';
+import { createSessionToken, readSessionToken } from '@/lib/session';
+import { roleHas, ROLE_PERMISSIONS, type Role } from '@/lib/domain';
+import { reportToCsv, reportToHtml } from '@/lib/services/reports';
 
 /**
  * Deep diagnostic: runs every read-side service the screens depend on and
@@ -59,6 +63,69 @@ export async function runDiagnostic() {
       return `${report.rows.length} rows, ${report.columns.length} columns`;
     }));
   }
+
+  /* ---- authentication, session signing and permission gating ---- */
+
+  const accounts: { username: string; password: string; role: Role }[] = [
+    { username: 'admin', password: 'Admin@2024', role: 'ADMINISTRATOR' },
+    { username: 'manager', password: 'Fleet@2026', role: 'FLEET_MANAGER' },
+    { username: 'ops', password: 'Ops@2026', role: 'OPERATIONS_OFFICER' },
+    { username: 'viewer', password: 'View@2026', role: 'VIEWER' },
+  ];
+
+  for (const account of accounts) {
+    push(await check(`login:${account.username}`, async () => {
+      const { user } = await login(account.username, account.password);
+      if (user.role !== account.role) throw new Error(`expected role ${account.role}, got ${user.role}`);
+      const token = createSessionToken(user);
+      const restored = readSessionToken(token);
+      if (!restored || restored.id !== user.id) throw new Error('session token did not round-trip');
+      if (readSessionToken(`${token}x`)) throw new Error('tampered token was accepted');
+      return `${user.role}, ${ROLE_PERMISSIONS[user.role].length} permissions, session verified`;
+    }));
+  }
+
+  push(await check('login:wrong-password-rejected', async () => {
+    try {
+      await login('admin', 'definitely-not-the-password');
+      throw new Error('a wrong password was accepted');
+    } catch (error) {
+      if ((error as Error).message === 'a wrong password was accepted') throw error;
+      return 'rejected as expected';
+    }
+  }));
+
+  push(await check('permissions:viewer-cannot-manage', async () => {
+    const dbUser = await findByUsername('viewer');
+    if (!dbUser) throw new Error('viewer account missing');
+    const denied = (['MANAGE_VEHICLES', 'MANAGE_USERS', 'VIEW_AUDIT_LOG', 'IMPORT_DATA'] as const)
+      .filter((p) => roleHas(dbUser.role, p));
+    if (denied.length) throw new Error(`viewer unexpectedly holds ${denied.join(', ')}`);
+    return 'viewer blocked from 4 write/admin permissions';
+  }));
+
+  push(await check('permissions:admin-can-manage-users', async () => {
+    const dbUser = await findByUsername('admin');
+    if (!dbUser) throw new Error('admin account missing');
+    const users = await listUsers({
+      id: dbUser.id, username: dbUser.username, fullName: dbUser.full_name, email: dbUser.email,
+      role: dbUser.role, mustChangePassword: false,
+    });
+    return `${users.length} users visible to administrator`;
+  }));
+
+  push(await check('export:csv', async () => {
+    const csv = reportToCsv(await buildReport('fleet'));
+    if (!csv.split('\n').length) throw new Error('empty CSV');
+    return `${csv.split(/\r?\n/).length} lines`;
+  }));
+
+  push(await check('export:printable-html', async () => {
+    const html = reportToHtml(await buildReport('utilisation'));
+    if (!html.includes('<table')) throw new Error('HTML report has no table');
+    return `${html.length} bytes`;
+  }));
+
   return checks;
 }
 
