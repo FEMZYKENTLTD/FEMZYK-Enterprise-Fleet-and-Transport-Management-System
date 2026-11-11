@@ -14,12 +14,15 @@ import { listMaintenance, maintenanceDue, listFuel, listExpenses } from '@/lib/s
  * reports counts or the failure message. Secret-gated (BOOTSTRAP_SECRET) and
  * returns no row content, only shapes — safe for a public deployment.
  *
- * GET /api/health/deep?secret=...
+ * The secret may be supplied as `?secret=…`, the `x-bootstrap-secret` header,
+ * or the last path segment (`/api/health/deep/<secret>`) so it can be checked
+ * from tools that cannot set headers.
  */
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
 type Check = { name: string; ok: boolean; detail: string };
+type Ctx = { params: Promise<{ secret?: string[] }> };
 
 async function check(name: string, fn: () => Promise<string>): Promise<Check> {
   try {
@@ -29,14 +32,7 @@ async function check(name: string, fn: () => Promise<string>): Promise<Check> {
   }
 }
 
-export async function GET(request: Request) {
-  const expected = process.env.BOOTSTRAP_SECRET;
-  const provided = request.headers.get('x-bootstrap-secret') ?? new URL(request.url).searchParams.get('secret');
-  if (expected && provided !== expected) {
-    return NextResponse.json({ error: 'Invalid secret.' }, { status: 401 });
-  }
-  if (!isConfigured()) return NextResponse.json({ error: 'Database is not configured.' }, { status: 503 });
-
+export async function runDiagnostic() {
   const checks: Check[] = [];
   const push = (c: Check) => { checks.push(c); return c; };
 
@@ -63,7 +59,21 @@ export async function GET(request: Request) {
       return `${report.rows.length} rows, ${report.columns.length} columns`;
     }));
   }
+  return checks;
+}
 
+export async function GET(request: Request, context: Ctx) {
+  const expected = process.env.BOOTSTRAP_SECRET;
+  const params = context?.params ? await context.params : {};
+  const provided = request.headers.get('x-bootstrap-secret')
+    ?? new URL(request.url).searchParams.get('secret')
+    ?? params.secret?.[0];
+  if (expected && provided !== expected) {
+    return NextResponse.json({ error: 'Invalid secret.' }, { status: 401 });
+  }
+  if (!isConfigured()) return NextResponse.json({ error: 'Database is not configured.' }, { status: 503 });
+
+  const checks = await runDiagnostic();
   const failed = checks.filter((c) => !c.ok);
   return NextResponse.json(
     { ok: failed.length === 0, passed: checks.length - failed.length, failed: failed.length, checks },
