@@ -146,10 +146,11 @@ are issued rather than self-registered:
 | `GET /api/health` | public | Database connectivity, per-table row counts, seed state |
 | `GET /api/health/deep/<BOOTSTRAP_SECRET>` | secret | Runs every read-side service, all 11 reports, all 4 demo logins, session round-trip, tampered-token rejection, permission assertions, CSV + HTML export |
 
-Latest deep run on the production deployment (`f075f05`): **30/30 checks passed, 0 failed** — 21 read-side
-checks (dashboard, 8 list services, all 11 reports) plus 9 authenticated-path checks (4 demo logins with role
+Latest deep run on the production deployment (`10332f2`): **31/31 checks passed, 0 failed** — 21 read-side
+checks (dashboard, 8 list services, all 11 reports) plus 10 authenticated-path checks (4 demo logins with role
 assertion, HMAC session round-trip and tampered-token rejection; wrong-password rejection; viewer denied 4
-write/admin permissions; administrator sees all 4 users; CSV export; printable-HTML export).
+write/admin permissions; administrator sees all 4 users; password reset refusing a mismatched identity; CSV
+export; printable-HTML export).
 
 Both probes send `Cache-Control: no-store`, so neither the CDN nor the browser can replay an earlier build's
 result. When checking a deployment, note that some HTTP clients and page-fetching tools cache by full URL: if a
