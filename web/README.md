@@ -75,6 +75,34 @@ Environment variables:
 3. `curl -X POST https://<host>/api/demo -H "x-bootstrap-secret: $BOOTSTRAP_SECRET"`
    → loads the demonstration data set through the normal service functions (idempotent).
 
+### `supabase/seed_demo.sql`
+
+The same data set as a plain SQL script, for when you want the database populated
+without the app running (new project, CI, a reviewer's own Supabase instance, or a
+reset after experimenting). Run it after `0001_schema.sql`:
+
+```
+psql "$DATABASE_URL" -f supabase/seed_demo.sql
+# or paste it into the Supabase SQL editor
+```
+
+It loads 10 employees, 6 drivers, 10 vehicles, 5 assignments, 12 trips, 7 maintenance
+records, 10 fuel records and 22 expenses (16 mirrored from fuel/maintenance exactly as
+the service layer writes them, 6 manual), plus the four role accounts and their
+PBKDF2 password hashes.
+
+Safety properties, so it can be re-run without fear:
+
+* **All-or-nothing.** The whole file runs in one transaction and ends with a `do` block
+  that raises an exception — rolling everything back — unless the reload produces the
+  exact expected row counts. A bad edit leaves the database untouched.
+* **Idempotent.** It truncates and reloads the operational tables, so running it twice
+  is the same as running it once.
+* **Accounts are preserved, not overwritten.** Users are only inserted when the username
+  is missing, so a password changed in the UI survives a reseed.
+* **Explicit ids are paired with `setval`**, so the identity sequences continue after the
+  seeded rows instead of colliding with them on the next insert.
+
 ## Demo accounts
 
 | Username | Password | Role |
