@@ -6,7 +6,8 @@ import { SESSION_COOKIE } from '@/lib/session-cookie';
  * server component runs. The cookie is fully verified (HMAC + expiry) in the
  * server layer for every page and API route, so this is only UX.
  */
-const PUBLIC_PATHS = ['/login', '/api/auth/login', '/api/auth/reset', '/api/bootstrap', '/api/demo'];
+// '/' is an exact-match public landing page; everything else under /(app) needs a session.
+const PUBLIC_PATHS = ['/', '/login', '/api/auth/login', '/api/auth/reset', '/api/bootstrap', '/api/demo'];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
