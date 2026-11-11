@@ -132,9 +132,11 @@ checks (dashboard, 8 list services, all 11 reports) plus 9 authenticated-path ch
 assertion, HMAC session round-trip and tampered-token rejection; wrong-password rejection; viewer denied 4
 write/admin permissions; administrator sees all 4 users; CSV export; printable-HTML export).
 
-Both probes send `Cache-Control: no-store`, so a CDN cannot serve a stale result from an earlier build. If a
-probe URL ever returns an older payload than the deployment you know is live, append any unique query string
-(`?cb=1`) to bypass a previously cached copy before investigating the code.
+Both probes send `Cache-Control: no-store`, so neither the CDN nor the browser can replay an earlier build's
+result. When checking a deployment, note that some HTTP clients and page-fetching tools cache by full URL: if a
+probe URL returns an older payload than the deployment you know is live, request a fresh URL (append any unique
+query string, e.g. `?cb=2`) before investigating the code — a response that never changes across deployments is
+almost always the client's cache, not the app's.
 
 ## Deployment
 
