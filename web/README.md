@@ -91,3 +91,20 @@ Environment variables:
 * Business rules ported 1:1 from the Java services: vehicle status transition map, licence-category permits,
   one-active-assignment partial unique indexes, trip odometer rules (≤5,000 km, no regression), fuel total derivation,
   maintenance status ↔ vehicle status coupling, expense mirroring, last-administrator protection.
+
+## Verification endpoints
+
+| Endpoint | Auth | Purpose |
+| --- | --- | --- |
+| `GET /api/health` | public | Database connectivity, per-table row counts, seed state |
+| `GET /api/health/deep/<BOOTSTRAP_SECRET>` | secret | Runs every read-side service, all 11 reports, all 4 demo logins, session round-trip, tampered-token rejection, permission assertions, CSV + HTML export |
+
+Latest deep run on the production deployment: **28/28 checks passed**.
+
+## Deployment
+
+Vercel project `femzyk-fleet` (root directory `web`, framework Next.js) tracking this branch, with
+`NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SESSION_SECRET`, `BOOTSTRAP_SECRET`,
+`DEMO_MODE=true` and `NEXT_PUBLIC_APP_VERSION` set for production, preview and development.
+
+Production URL: <https://femzyk-fleet.vercel.app>
