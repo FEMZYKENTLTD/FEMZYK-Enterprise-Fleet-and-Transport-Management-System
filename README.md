@@ -5,10 +5,20 @@
 ![Maven](https://img.shields.io/badge/Build-Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 ![Tests](https://img.shields.io/badge/JUnit%205-49%20passing-16A34A?style=for-the-badge)
+![Web](https://img.shields.io/badge/Web-Next.js%2016%20%2B%20PostgreSQL-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 
 A single Java 17 desktop application for managing a company fleet: **employees, drivers, vehicles, assignments, trips, maintenance, fuel, expenses, reports and audit** — on one SQLite database, behind role-based login.
 
-Developed by **Olufemi Keripe (FEMZYK ENTERPRISES LTD)** and submitted for **LASU CSC 392 (SIWES)**. Version **2.0.0**.
+Developed by **Olufemi Keripe (FEMZYK ENTERPRISES LTD)** and submitted for **LASU CSC 392 (SIWES)**. Version **3.0.0**.
+
+**Live web edition:** <https://femzyk-fleet.vercel.app> — the same modules, rules and reports running in the browser against PostgreSQL. See [`web/README.md`](web/README.md) for that tier.
+
+| Sign in | Password | Role |
+|---|---|---|
+| `admin` | `Admin@2024` | Administrator — everything, including users and audit |
+| `manager` | `Fleet@2026` | Fleet Manager — fleet, people, operations, reports |
+| `ops` | `Ops@2026` | Operations Officer — trips, maintenance, fuel, expenses, reports |
+| `viewer` | `View@2026` | Viewer — read-only dashboards and reports |
 
 ---
 
@@ -20,6 +30,7 @@ Developed by **Olufemi Keripe (FEMZYK ENTERPRISES LTD)** and submitted for **LAS
 - [Build from source](#build-from-source)
 - [Architecture](#architecture)
 - [Testing](#testing)
+- [Web edition](#web-edition)
 - [Documentation](#documentation)
 - [Repository layout](#repository-layout)
 - [Author](#author)
@@ -94,6 +105,19 @@ java -jar target/FEMZYK-Fleet-Management.jar
 ```
 
 Only runtime dependency: `sqlite-jdbc` (shaded into the jar). Details in [docs/INSTALLATION-GUIDE.md](docs/INSTALLATION-GUIDE.md).
+
+## Web edition
+
+`web/` is a complete browser tier built with **Next.js 16 (App Router), React 19, Tailwind CSS 4 and PostgreSQL (Supabase)**. It is not a landing page — it is the whole application:
+
+* 13 screens: dashboard, vehicles, employees, drivers, assignments, trips, maintenance, fuel, expenses, reports, audit, data & system, users.
+* 26 server-side route handlers; the browser never holds a database credential and cannot query PostgreSQL directly.
+* Row-level security enabled on every table with **no policies**, so only the server-side service-role key can read or write.
+* PBKDF2-HMAC-SHA256 password hashing that is byte-compatible with `PasswordUtil`, so user rows move between the desktop and web editions unchanged.
+* Eleven live reports with CSV download and printable HTML (browser → PDF) output.
+* Same business rules as the Java services: vehicle status state machine, licence-category permits, single active assignment per vehicle/driver, trip odometer limits, fuel total derivation, maintenance/expense mirroring, last-administrator protection.
+
+Deployment: Vercel (project `femzyk-fleet`, root directory `web`) with the Supabase project as the database. Setup, environment variables and seeding are documented in [`web/README.md`](web/README.md); `GET /api/health` reports database connectivity and row counts.
 
 ## Architecture
 
