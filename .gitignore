@@ -32,5 +32,8 @@ FemzykVehicleSystem/
 *.tmp
 *.bak
 *.zip
+# ...except the downloadable release packages, which are built artefacts kept in
+# the repository because GitHub release asset uploads are not available here.
+!downloads/femzyk-fleet-*.zip
 dist/
 .vs/
