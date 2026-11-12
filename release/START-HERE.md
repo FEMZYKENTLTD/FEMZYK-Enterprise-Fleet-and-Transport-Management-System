@@ -94,11 +94,28 @@ This loads 10 employees, 6 drivers, 10 vehicles, 5 vehicle assignments,
 12 trips, 7 maintenance records, 10 fuel records and 6 expenses. Loading it a
 second time is a no-op, so it is safe to leave in your shortcut.
 
-To open the pre-populated database that ships in this folder instead:
+To use the pre-populated database that ships in this folder instead, point
+`--data` at a folder containing it **named `fleet.db`**:
 
 ```bash
-java -jar FEMZYK-Fleet-Management.jar --data database
+java -jar FEMZYK-Fleet-Management.jar --data database\demo-data
 ```
+
+The database file is renamed to `fleet.db` in that folder precisely because
+the application always opens `fleet.db` inside whatever folder you give it. If
+you point `--data` at a folder that does not contain a `fleet.db`, it will
+create an empty one beside your data and you will see an empty fleet rather
+than an error.
+
+Two things to know before you do that:
+
+- The application writes its `logs\` folder next to the database, so it will
+  add files inside the package. That is harmless, but if you would rather keep
+  the package pristine, copy the folder somewhere first and point `--data` at
+  the copy.
+- Whatever you do in this database is permanent. It is a real SQLite file, not
+  a read-only sample, so if you want to experiment and start over, keep a
+  backup of the original `demo-data` folder.
 
 ---
 
@@ -161,7 +178,8 @@ used to verify this build before release.
 FEMZYK-Fleet-Management.jar     the application (everything is inside this file)
 windows\FEMZYK-Fleet.bat        double-click launcher for Windows
 run-linux-macos.sh              launcher for macOS and Linux
-database\fleet-demo.db          a pre-populated database you can open with --data
+database\demo-data\fleet.db    10 vehicles, 10 employees, 12 trips — ready to open
+database\fleet-demo.db         the same data under its original name
 database\schema.sql            the schema, for reference or manual inspection
 sample-data\*.csv               CSV files to try the import feature
 documentation\                  user guide, architecture, database design, test plan

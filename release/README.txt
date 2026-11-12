@@ -1,7 +1,9 @@
 FEMZYK Enterprise Fleet & Transport Management System — release 2.0.0 (2026-09-06)
 
 FEMZYK-Fleet-Management.jar   Runnable application (Java 17+). Run:  java -jar FEMZYK-Fleet-Management.jar
-database/fleet-demo.db        Ready-made database with demo data (login admin / Admin@2024, then set a new password).
+database/demo-data/fleet.db   Ready-made database with demo data. Point --data at
+                              database/demo-data to use it (login admin / Admin@2024,
+                              then set a new password).
                               To use it: copy to ~/FemzykFleetManagement/fleet.db, or run with
                               java -jar FEMZYK-Fleet-Management.jar --data <folder containing fleet.db>
 database/schema.sql           The schema the application creates on first run.
