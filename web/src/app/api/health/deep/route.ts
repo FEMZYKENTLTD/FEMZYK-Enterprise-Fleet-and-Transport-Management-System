@@ -8,7 +8,7 @@ import { listDrivers } from '@/lib/services/drivers';
 import { listAssignments } from '@/lib/services/assignments';
 import { listTrips } from '@/lib/services/trips';
 import { listMaintenance, maintenanceDue, listFuel, listExpenses } from '@/lib/services/operations';
-import { verifyCredentials, listUsers, findByUsername, resetPasswordWithEmail } from '@/lib/auth';
+import { verifyCredentials, listUsers, findByUsername, verifyResetIdentity } from '@/lib/auth';
 import { createSessionToken, readSessionToken } from '@/lib/session';
 import { roleHas, ROLE_PERMISSIONS, type Role } from '@/lib/domain';
 import { reportToCsv, reportToHtml } from '@/lib/services/reports';
@@ -122,15 +122,14 @@ export async function runDiagnostic() {
   }));
 
   push(await check('reset:rejects-mismatched-identity', async () => {
-    // Non-destructive: a wrong e-mail must be refused before any write.
-    let rejected = false;
-    try {
-      await resetPasswordWithEmail('admin', 'not-the-registered-address@example.com', 'Irrelevant123');
-    } catch {
-      rejected = true;
-    }
-    if (!rejected) throw new Error('a mismatched username/e-mail was accepted');
-    return 'mismatched identity rejected';
+    // Read-only: verifyResetIdentity() answers the same question as the real
+    // reset without writing a password or an audit row, so probing stays
+    // invisible in the audit trail.
+    const wrong = await verifyResetIdentity('admin', 'not-the-registered-address@example.com');
+    if (wrong.matches) throw new Error('a mismatched username/e-mail was accepted');
+    const unknown = await verifyResetIdentity('no-such-account-here', 'anything@example.com');
+    if (unknown.matches) throw new Error('an unknown account was accepted');
+    return 'mismatched identity rejected, no audit write';
   }));
 
   push(await check('export:csv', async () => {

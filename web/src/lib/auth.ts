@@ -272,6 +272,24 @@ export async function deleteUser(actor: SessionUser, userId: number): Promise<vo
   await audit(actor.username, 'DELETE', 'USER', user.username, 'User account deactivated and removed');
 }
 
+/**
+ * Read-only identity check for the reset flow.
+ *
+ * Answers "would resetPasswordWithEmail() accept this username/e-mail pair?"
+ * without changing anything: no password write, and deliberately no audit row.
+ * A failed reset attempt is a genuine security event in the real flow, but a
+ * monitoring probe asking the same question is not, and logging it would let
+ * health checks pollute the audit trail with events no user caused.
+ */
+export async function verifyResetIdentity(username: string, email: string): Promise<{ matches: boolean; reason?: string }> {
+  const user = await findByUsername(username ?? '');
+  if (!user || !user.email || user.email.toLowerCase() !== (email ?? '').trim().toLowerCase()) {
+    return { matches: false, reason: 'Username and e-mail address do not match any account.' };
+  }
+  if (!user.active) return { matches: false, reason: 'This account has been disabled.' };
+  return { matches: true };
+}
+
 /** Self-service reset: username + registered e-mail must match. */
 export async function resetPasswordWithEmail(username: string, email: string, newPassword: string): Promise<void> {
   const user = await findByUsername(username ?? '');
