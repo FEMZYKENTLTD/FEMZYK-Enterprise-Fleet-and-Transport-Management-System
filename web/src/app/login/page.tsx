@@ -93,12 +93,12 @@ export default async function LoginPage() {
             )}
             {isConfigured() && !dbError && !ready && (
               <Banner tone="warning" title="First-run setup required">
-                No accounts exist yet. Call <code className="font-mono">POST /api/bootstrap</code> once to create the default administrator
-                (<b>admin</b> / <b>Admin@2024</b>), then sign in.
+                No accounts exist yet. Call <code className="font-mono">POST /api/bootstrap</code> once with the
+                bootstrap secret to create the default administrator account, then sign in as <b>admin</b>.
               </Banner>
             )}
 
-            <LoginForm demoMode={process.env.DEMO_MODE !== 'false'} />
+            <LoginForm demoMode={process.env.DEMO_MODE === 'true'} />
           </div>
 
           <p className="mt-5 text-center text-[11px] leading-relaxed text-slate-400">
@@ -106,9 +106,11 @@ export default async function LoginPage() {
             Lagos State University · CSC 392 SIWES project
           </p>
           <p className="mt-3 text-center text-[11px] leading-relaxed text-slate-500">
-            New here? Accounts are issued by your fleet administrator under{' '}
-            <span className="font-medium text-slate-600">Users &amp; roles</span> — there is no public sign-up,
-            because this system holds company fleet and salary data.
+            New here?{' '}
+            <Link href="/login/register" className="font-semibold text-blue-700 hover:text-blue-800">
+              Request an account
+            </Link>{' '}
+            — an administrator approves every request, because this system holds company fleet and salary data.
           </p>
           <p className="mt-2 text-center text-[11px] text-slate-400">
             <Link href="/" className="hover:text-slate-600">About this system</Link>

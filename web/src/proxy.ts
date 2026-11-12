@@ -7,7 +7,10 @@ import { SESSION_COOKIE } from '@/lib/session-cookie';
  * server layer for every page and API route, so this is only UX.
  */
 // '/' is an exact-match public landing page; everything else under /(app) needs a session.
-const PUBLIC_PATHS = ['/', '/login', '/login/reset', '/api/auth/login', '/api/auth/reset', '/api/bootstrap', '/api/demo'];
+const PUBLIC_PATHS = [
+  '/', '/login', '/login/reset', '/login/register',
+  '/api/auth/login', '/api/auth/reset', '/api/register', '/api/bootstrap', '/api/demo',
+];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

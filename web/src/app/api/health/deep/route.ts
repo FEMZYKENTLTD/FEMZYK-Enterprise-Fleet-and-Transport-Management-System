@@ -8,7 +8,7 @@ import { listDrivers } from '@/lib/services/drivers';
 import { listAssignments } from '@/lib/services/assignments';
 import { listTrips } from '@/lib/services/trips';
 import { listMaintenance, maintenanceDue, listFuel, listExpenses } from '@/lib/services/operations';
-import { login, listUsers, findByUsername, resetPasswordWithEmail } from '@/lib/auth';
+import { verifyCredentials, listUsers, findByUsername, resetPasswordWithEmail } from '@/lib/auth';
 import { createSessionToken, readSessionToken } from '@/lib/session';
 import { roleHas, ROLE_PERMISSIONS, type Role } from '@/lib/domain';
 import { reportToCsv, reportToHtml } from '@/lib/services/reports';
@@ -76,25 +76,29 @@ export async function runDiagnostic() {
     { username: 'viewer', password: 'View@2026', role: 'VIEWER' },
   ];
 
+  // Verification only: `login()` writes an audit row and touches the lockout
+  // counters, so probing with it every few minutes would flood the audit log
+  // with synthetic sign-ins. verifyCredentials() performs the same PBKDF2
+  // comparison and writes nothing.
   for (const account of accounts) {
-    push(await check(`login:${account.username}`, async () => {
-      const { user } = await login(account.username, account.password);
+    push(await check(`credentials:${account.username}`, async () => {
+      const user = await verifyCredentials(account.username, account.password);
       if (user.role !== account.role) throw new Error(`expected role ${account.role}, got ${user.role}`);
       const token = createSessionToken(user);
       const restored = readSessionToken(token);
       if (!restored || restored.id !== user.id) throw new Error('session token did not round-trip');
       if (readSessionToken(`${token}x`)) throw new Error('tampered token was accepted');
-      return `${user.role}, ${ROLE_PERMISSIONS[user.role].length} permissions, session verified`;
+      return `${user.role}, ${ROLE_PERMISSIONS[user.role].length} permissions, session verified, no audit write`;
     }));
   }
 
-  push(await check('login:wrong-password-rejected', async () => {
+  push(await check('credentials:wrong-password-rejected', async () => {
     try {
-      await login('admin', 'definitely-not-the-password');
+      await verifyCredentials('admin', 'definitely-not-the-password');
       throw new Error('a wrong password was accepted');
     } catch (error) {
       if ((error as Error).message === 'a wrong password was accepted') throw error;
-      return 'rejected as expected';
+      return 'rejected as expected, no audit write';
     }
   }));
 

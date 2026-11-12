@@ -112,6 +112,27 @@ export async function login(username: string, password: string): Promise<{ user:
   return { user: toSessionUser(user), mustChangePassword: user.must_change_password };
 }
 
+/**
+ * Verifies a password WITHOUT modifying the account or the audit log.
+ *
+ * `login()` deliberately records a successful sign-in and increments/resets
+ * the failed-attempt counters, which is correct for a real user but wrong for
+ * a health probe: checking the deployment every few minutes would bury genuine
+ * audit entries under thousands of synthetic logins. This function runs the
+ * same PBKDF2 comparison and the same active/locked checks, and writes nothing.
+ */
+export async function verifyCredentials(username: string, password: string): Promise<SessionUser> {
+  const user = await findByUsername(username);
+  if (!user || !user.active) throw new AuthError('Invalid username or password.');
+  if (user.locked_until && new Date(user.locked_until) > new Date()) {
+    throw new AuthError('Account is temporarily locked.');
+  }
+  if (!verifyPassword(password, user.password_salt, user.password_hash)) {
+    throw new AuthError('Invalid username or password.');
+  }
+  return toSessionUser(user);
+}
+
 /** Creates the default administrator on first run (idempotent). */
 export async function ensureDefaultAdministrator(): Promise<{ created: boolean }> {
   const { count, error } = await db().from('users').select('id', { count: 'exact', head: true });

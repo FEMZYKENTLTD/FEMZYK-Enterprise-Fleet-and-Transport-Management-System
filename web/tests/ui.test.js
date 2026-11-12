@@ -16,7 +16,7 @@ const { describe, it, expect, run } = require('./harness');
 const React = require('react');
 const { render, screen, waitFor, cleanup } = require('@testing-library/react');
 const userEvent = require('@testing-library/user-event').default;
-const { LoginForm, ResetForm } = require('./.build/ui.cjs');
+const { LoginForm, ResetForm, RegisterForm } = require('./.build/ui.cjs');
 const { navigation } = require('./stubs/next-navigation.js');
 
 /* ------------------------------------------------------------------ fetch -- */
@@ -205,6 +205,62 @@ describe('Password reset form', () => {
     const alert = await screen.findByRole('alert');
     expect(alert.textContent).toContain('do not match any account');
     expect(screen.queryByText(/password updated/i)).toBeFalsy();
+    cleanup();
+  });
+});
+
+describe('Account request form', () => {
+  it('keeps submit disabled until name, username and e-mail are filled', async () => {
+    render(React.createElement(RegisterForm));
+    expect(screen.getByRole('button', { name: /submit request/i }).disabled).toBe(true);
+    await typeInto('Full name', 'Ada Obi');
+    await typeInto('Username', 'ada.obi');
+    expect(screen.getByRole('button', { name: /submit request/i }).disabled).toBe(true);
+    await typeInto('Work e-mail', 'ada.obi@company.com');
+    expect(screen.getByRole('button', { name: /submit request/i }).disabled).toBe(false);
+    cleanup();
+  });
+
+  it('posts the request and shows a reference, not a session', async () => {
+    stubFetch();
+    responder = () => ({ status: 201, body: { ok: true, id: 7 } });
+    render(React.createElement(RegisterForm));
+
+    await typeInto('Full name', 'Ada Obi');
+    await typeInto('Username', 'ada.obi');
+    await typeInto('Work e-mail', 'ada.obi@company.com');
+    await userEvent.click(screen.getByRole('button', { name: /submit request/i }));
+
+    await waitFor(() => expect(screen.getByText(/request received/i)).toBeTruthy());
+    expect(calls[0].url).toBe('/api/register');
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].body.username).toBe('ada.obi');
+    expect(screen.getByText(/REQ-0007/)).toBeTruthy();
+    // Crucially: a request never navigates into the application.
+    expect(navigation.pushes).toEqual([]);
+    cleanup();
+  });
+
+  it('never defaults to an elevated role', async () => {
+    render(React.createElement(RegisterForm));
+    const select = document.querySelector('select');
+    expect(select.value).toBe('VIEWER');
+    cleanup();
+  });
+
+  it('surfaces a duplicate-username rejection from the server', async () => {
+    stubFetch();
+    responder = () => ({ status: 400, body: { error: 'That username is already in use. Try signing in instead.' } });
+    render(React.createElement(RegisterForm));
+
+    await typeInto('Full name', 'Ada Obi');
+    await typeInto('Username', 'admin');
+    await typeInto('Work e-mail', 'ada@company.com');
+    await userEvent.click(screen.getByRole('button', { name: /submit request/i }));
+
+    const alert = await screen.findByRole('alert');
+    expect(alert.textContent).toContain('already in use');
+    expect(screen.queryByText(/request received/i)).toBeFalsy();
     cleanup();
   });
 });
